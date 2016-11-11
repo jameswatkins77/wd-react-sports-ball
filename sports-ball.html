@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script>
+      const App = React.createClass({
+        getInitialState: function () {
+          return {who: ''};
+        },
+        handleChange: function(event) {
+          const nextWho = event.target.value;
+          this.setState({who: nextWho});
+        },
+        render: function() {
+            let message = "What's your favorite city?"
+            let response;
+            if (this.state.who.trim() === '') {
+                response = 'Go ahead, type in a city.';
+            } else if (this.state.who === 'Denver') {
+                response = 'Go Broncos!';
+            } else if (this.state.who === 'Oakland') {
+                response = 'Go Raiders!'
+            } else if (this.state.who === 'San Diego') {
+                response = 'Go Chargers!'
+            } else if (this.state.who === 'Cleveland') {
+                response = 'Go Browns!'
+            } else if (this.state.who === 'San Francisco') {
+                response = 'Go Niners!'
+            } else if (this.state.who === 'Tampa Bay') {
+                response = 'Go Bucs!'
+            } else {
+                response = `${this.state.who}! Never heard of it.`
+            }
+            return React.createElement('div', null,
+                React.createElement('h1', null, message),
+                React.createElement('input', {
+                    onChange: this.handleChange,
+                    type: 'text',
+                    value: this.state.who
+            }),
+            React.createElement('h3', null, `${response}`)
+          );
+        }
+      });
+      ReactDOM.render(
+        React.createElement(App),
+        document.getElementById('app')
+      );
+    </script>
+  </body>
+</html>
